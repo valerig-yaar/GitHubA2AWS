@@ -74,8 +74,8 @@ After the initial local apply, populate the following GitHub secrets:
 | `AWS_REGION`            | AWS region for deployment               |
 | `AWS_ROLE_TO_ASSUME`    | IAM Role ARN to assume via OIDC         |
 | `AWS_ROLE_TO_ASSUME_TF` | IAM Role ARN to assume via OIDC fot TF  |
-| `TF_VAR_s3_bucket`      | Terraform state bucket                  |
-| `TF_VAR_dynamodb_table` | DynamoDB lock table for state           |
+| `TF_STATE_BUCKET_NAME`  | Terraform state bucket                  |
+| `TF_LOCKS_TABLE_NAME`   | DynamoDB lock table for state           |
 
 These secrets are used by the GitHub Actions workflows defined in `.github/workflows/`.
 
