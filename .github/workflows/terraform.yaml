@@ -66,18 +66,17 @@ jobs:
         run: |
           pip install checkov
           checkov -d . --quiet --soft-fail --output json > checkov-report.json
-          cat checkov-report.json | jq '
-            .results.failed_checks
-            | map(select(.severity == "HIGH" or .severity == "CRITICAL"))
-            | if length > 0 then
-                (map({check_id, check_name, severity, file_path, resource}) | .[]) as $item
-                | "High/Critical issue: \($item.check_id) - \($item.check_name) in \($item.file_path) for resource \($item.resource)"
-                | stdout
-                | error("High or critical Checkov issue found")
+          cat checkov-report.json | jq -r '
+          .results.failed_checks
+          | map(select(.severity == "HIGH" or .severity == "CRITICAL"))
+          | if length > 0 then
+              (map("High/Critical issue: \(.check_id) - \(.check_name) in \(.file_path) for resource \(.resource)") | .[]),
+              error("High or critical Checkov issue found")
             else
-                "Checkov passed with no high or critical issues"
+              "Checkov passed with no high or critical issues"
             end
           '
+
 
       - name: Terraform Plan
         if: ${{ github.event.inputs.action == 'plan' || github.event.inputs.action == 'plan-apply' || github.event_name == 'push' || github.event_name == 'pull_request' }}
