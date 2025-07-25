@@ -67,7 +67,7 @@ jobs:
           pip install checkov
           checkov -d . --quiet --soft-fail --output json > checkov-report.json
           cat checkov-report.json | jq -r '
-          .results.failed_checks
+          .[0].results.failed_checks
           | map(select(.severity == "HIGH" or .severity == "CRITICAL"))
           | if length > 0 then
               (map("High/Critical issue: \(.check_id) - \(.check_name) in \(.file_path) for resource \(.resource)") | .[]),
@@ -75,7 +75,8 @@ jobs:
             else
               "Checkov passed with no high or critical issues"
             end
-          '
+        '
+
 
 
       - name: Terraform Plan
