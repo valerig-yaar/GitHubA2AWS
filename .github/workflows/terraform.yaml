@@ -75,10 +75,8 @@ jobs:
             else
               "Checkov passed with no high or critical issues"
             end
-        '
-
-
-
+          '
+          
       - name: Terraform Plan
         if: ${{ github.event.inputs.action == 'plan' || github.event.inputs.action == 'plan-apply' || github.event_name == 'push' || github.event_name == 'pull_request' }}
         run: terraform plan
