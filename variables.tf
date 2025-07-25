@@ -1,7 +1,7 @@
 variable "tf_state_bucket_name" {
   description = "Name of the S3 bucket for Terraform state"
   type        = string
-  default     = "my-terraform-state-bucket-vg"
+  default     = "terraform-state-bucket-vg"
 }
 
 variable "tf_state_bucket_force_destroy" {
