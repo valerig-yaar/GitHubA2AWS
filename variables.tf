@@ -67,7 +67,7 @@ variable "github_org" {
 variable "github_repo" {
   description = "GitHub repository name"
   type        = string
-  default = "GitHubA2AWS"
+  default = "*"
 }
 
 variable "github_branch_pattern" {
