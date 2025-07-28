@@ -70,6 +70,12 @@ variable "github_repo" {
   default = "*"
 }
 
+variable "github_ref_type" {
+  description = "Git ref type: heads for branches, tags for tags"
+  type        = string
+  default     = "heads"
+}
+
 variable "github_branch_pattern" {
   description = "Branch pattern for OIDC sub claim"
   type        = string
@@ -77,5 +83,5 @@ variable "github_branch_pattern" {
 }
 
 locals {
-  github_actions_repo_sub = "repo:${var.github_org}/${var.github_repo}:ref:refs/heads/${var.github_branch_pattern}"
+  github_actions_repo_sub = "repo:${var.github_org}/${var.github_repo}:ref:refs/${var.github_ref_type}/${var.github_branch_pattern}"
 }
