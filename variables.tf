@@ -73,7 +73,7 @@ variable "github_repo" {
 variable "github_ref_type" {
   description = "Git ref type: heads for branches, tags for tags"
   type        = string
-  default     = "heads"
+  default     = "*"
 }
 
 variable "github_branch_pattern" {
