@@ -82,6 +82,13 @@ variable "github_branch_pattern" {
   default     = "*"
 }
 
+variable "allow_pr" {
+  description = "Allow pull requests to trigger the GitHub Actions role"
+  type        = bool
+  default     = true
+}
+
 locals {
   github_actions_repo_sub = "repo:${var.github_org}/${var.github_repo}:ref:refs/${var.github_ref_type}/${var.github_branch_pattern}"
+  github_actions_repo_pr = var.allow_pr ? "repo:${var.github_org}/${var.github_repo}:pull_request" : null
 }
